@@ -18,7 +18,7 @@ jobs:
           dockerfile: Dockerfile
           google-project-id: GCP_PROJECT_ID1
           image: aman1-test/w
-          registry-url: "asia-south1-docker.pkg.dev"
+          registry-url: " asia.gcr.io"
           path: . 
           tag: latest
       - gcp-gcr/gcr-auth:
@@ -27,7 +27,7 @@ jobs:
           google-compute-zone: GOOGLE_COMPUTE_ZONE
           google-project-id: GCP_PROJECT_ID1
       - gcp-gcr/push-image:
-          registry-url: "asia-south1-docker.pkg.dev"
+          registry-url: " asia.gcr.io"
           image: aman1-test/w
           google-project-id: GCP_PROJECT_ID1
           tag: latest   
