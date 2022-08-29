@@ -18,7 +18,7 @@ jobs:
           name: building image
           command: |
              docker build -t aman:v1 .
-             docker tag aman:v1 asia-south1-docker.pkg.dev/$GOOGLE_PROJECT_ID/aman1-test/test1:latest
+             docker tag aman:v1 asia-south1-docker.pkg.dev/bce-poc/aman1-test/test1:latest
       - gcloud/install
       
       - run:
