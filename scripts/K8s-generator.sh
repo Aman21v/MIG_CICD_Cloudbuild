@@ -2,6 +2,7 @@
 
 ENV=$1
 DOCKER_IMAGE=$2
+GCP_PROJECT_ID1=$3
 
 cat << EOF >> Deployment.yaml
 ---
@@ -23,7 +24,7 @@ spec:
     spec:
       containers:
         - name: core-webservices-$ENV
-          image: $DOCKER_IMAGE
+          image: asia-south1-docker.pkg.dev/$GCP_PROJECT_ID1/$DOCKER_IMAGE
           ports:
             - containerPort: 8080
 #          readinessProbe:
