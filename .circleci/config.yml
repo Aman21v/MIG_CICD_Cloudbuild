@@ -1,0 +1,41 @@
+version: 2.1
+orbs:
+  gcp-gcr: circleci/gcp-gcr@0.15.0
+  gcp-gke: circleci/gcp-gke@1.4.0
+  gh: circleci/github-cli@2.1.0
+
+jobs:
+  build-push-job:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - checkout
+      - setup_remote_docker:
+         version: 19.03.13         
+      - gcp-gcr/build-image:
+          docker-context: .
+          dockerfile: Dockerfile
+          google-project-id: GOOGLE_PROJECT_ID
+          image: aman1-test
+          registry-url: "gcr.io"
+          path: . 
+          tag: latest
+      - gcp-gcr/gcr-auth:
+          gcloud-service-key: GCP_SERVICE_KEY
+          google-compute-region: GOOGLE_COMPUTE_REGION
+          google-compute-zone: GOOGLE_COMPUTE_ZONE
+          google-project-id: GOOGLE_PROJECT_ID
+      - gcp-gcr/push-image:
+          registry-url: "gcr.io"
+          image: aman1-test
+          google-project-id: GOOGLE_PROJECT_ID
+          tag: latest
+workflows:  
+  workflow-build-push-image-aman:    
+    jobs:
+      - build-push-job:
+          filters:
+            branches:
+              only:
+                - main
+          context: test-ci
