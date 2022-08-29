@@ -17,13 +17,13 @@ jobs:
       - run:
           name: building image
           command: |
-             docker build -t aman:v1 .
-             docker tag aman:v1 asia-south1-docker.pkg.dev/bce-poc/aman1-test/test1:latest
+             docker build -t asia-south1-docker.pkg.dev/${GOOGLE_PROJECT_ID}/aman1-test/test1:latest .
+           
       - gcloud/install
       
       - run:
           name: pushing the image
-          command: docker push asia-south1-docker.pkg.dev/$GOOGLE_PROJECT_ID/aman1-test/test1:latest         
+          command: docker push asia-south1-docker.pkg.dev/${GOOGLE_PROJECT_ID}/aman1-test/test1:latest         
    
     
 workflows:  
