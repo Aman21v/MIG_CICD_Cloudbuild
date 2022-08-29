@@ -3,6 +3,7 @@ orbs:
   gcp-gcr: circleci/gcp-gcr@0.15.0
   gcp-gke: circleci/gcp-gke@1.4.0
   gh: circleci/github-cli@2.1.0
+  gcloud: circleci/gcp-cli@2.4.0
 
 jobs:
   build-push-job:
