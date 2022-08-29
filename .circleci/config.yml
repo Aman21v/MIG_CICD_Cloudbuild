@@ -13,19 +13,24 @@ jobs:
       - checkout
       - setup_remote_docker:
          version: 19.03.13
-
-      - run:
-          name: building image
-          command: |
-             gcloud auth configure-docker asia-south1-docker.pkg.dev -Y
-             
-           
-      - gcloud/install
-      
-      - run:
-          name: pushing the image
-          command: docker push asia-south1-docker.pkg.dev/bce-poc/aman1-test/test1:latest         
-   
+      - gcp-gcr/build-image:
+          docker-context: .
+          dockerfile: Dockerfile
+          google-project-id: GCP_PROJECT_ID1
+          image: aman-test
+          registry-url: "asia-south1-docker.pkg.dev"
+          path: . 
+          tag: latest
+      - gcp-gcr/gcr-auth:
+          gcloud-service-key: GCP_PROJECT_KEY
+          google-compute-region: GOOGLE_COMPUTE_REGION
+          google-compute-zone: GOOGLE_COMPUTE_ZONE
+          google-project-id: GCP_PROJECT_ID1
+      - gcp-gcr/push-image:
+          registry-url: "asia-south1-docker.pkg.dev"
+          image: aman-test
+          google-project-id: GCP_PROJECT_ID1
+          tag: latest   
     
 workflows:  
   workflow-build-push-image-aman:    
