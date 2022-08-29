@@ -26,6 +26,12 @@ jobs:
           command: |
            
             echo $GCP_PROJECT_KEY | docker login -u _json_key --password-stdin \asia-south1-docker.pkg.dev
+            
+      - gcp-gcr/push-image:
+          registry-url: "asia-south1-docker.pkg.dev"
+          image: aman1-test/w
+          google-project-id: GCP_PROJECT_ID1
+          tag: latest            
         
     
 workflows:  
