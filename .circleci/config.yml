@@ -13,25 +13,14 @@ jobs:
       - checkout
       - setup_remote_docker:
          version: 19.03.13
-      - gcp-gcr/build-image:
-          docker-context: .
-          dockerfile: Dockerfile
-          google-project-id: GCP_PROJECT_ID1
-          image: aman1-test/w
-          registry-url: "asia-south1-docker.pkg.dev"
-          path: . 
-          tag: latest
+
       - run:
           name: pushing image
           command: |
            
             echo $GCP_PROJECT_KEY | docker login -u _json_key --password-stdin \asia-south1-docker.pkg.dev
-            
-      - gcp-gcr/push-image:
-          registry-url: "asia-south1-docker.pkg.dev"
-          image: aman1-test/w
-          google-project-id: GCP_PROJECT_ID1
-          tag: latest            
+            docker build -t asia-south1-docker.pkg.dev/searce-playground-v1/aman1-test/w .
+            docker push asia-south1-docker.pkg.dev/searce-playground-v1/aman1-test/w    
         
     
 workflows:  
