@@ -25,7 +25,7 @@ jobs:
           name: pushing image
           command: |
            
-            echo $GCP_PROJECT_KEY | docker login -u _json_key --password-stdin \ asia-south1-docker.pkg.dev
+            echo $GCP_PROJECT_KEY | docker login -u _json_key --password-stdin \asia-south1-docker.pkg.dev
         
     
 workflows:  
