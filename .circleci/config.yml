@@ -16,20 +16,25 @@ jobs:
           docker-context: .
           dockerfile: Dockerfile
           google-project-id: GOOGLE_PROJECT_ID
-          image: aman1-test
-          registry-url: "gcr.io"
+          image: aman1-test/test
+          registry-url: "asia-south1-docker.pkg.dev"
           path: . 
           tag: latest
-      - gcp-gcr/gcr-auth:
-          gcloud-service-key: GCP_SERVICE_KEY
-          google-compute-region: GOOGLE_COMPUTE_REGION
-          google-compute-zone: GOOGLE_COMPUTE_ZONE
-          google-project-id: GOOGLE_PROJECT_ID
+          
+          
+      - k8s/install-kubectl
+      - gcloud/install
+      
+      - run:
+          name: AR authorization
+          command: gcloud auth configure-docker\asia-south1-docker.pkg.dev
+          
       - gcp-gcr/push-image:
-          registry-url: "gcr.io"
-          image: aman1-test
+          registry-url: "asia-south1-docker.pkg.dev"
+          image: aman1-test/test
           google-project-id: GOOGLE_PROJECT_ID
-          tag: latest
+          tag: latest     
+    
 workflows:  
   workflow-build-push-image-aman:    
     jobs:
