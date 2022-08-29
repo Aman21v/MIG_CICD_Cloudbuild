@@ -37,9 +37,9 @@ jobs:
           name: Deploy to Prod cluster
           command: |
             echo $GCP_PROJECT_KEY | gcloud auth activate-service-account --key-file=-
-            gcloud --quiet config set project ${GCP_PROJECT_ID1}
-            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-            gcloud container clusters get-credentials $PROD_CLUSTER_NAME --zone $GOOGLE_COMPUTE_ZONE
+            gcloud --quiet config set project $GCP_PROJECT_ID1
+            gcloud --quiet config set compute/zone $GOOGLE_COMPUTE_ZONE
+            gcloud container clusters get-credentials $PROD_CLUSTER_NAME --zone $GOOGLE_COMPUTE_ZONE -project $GCP_PROJECT_ID1
             cd ~/project/scripts
             sh K8s-generator.sh prod $DOCKER_IMAGE
             cat Deployment.yaml
