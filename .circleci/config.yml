@@ -24,7 +24,7 @@ jobs:
          
   deploy_to_prod:
     environment:
-      DOCKER_IMAGE: asia-south1-docker.pkg.dev/searce-playground-v1/aman1-test/w:<<pipeline.number>>
+      DOCKER_IMAGE: aman1-test/w:<<pipeline.number>>  
 
     docker:
       - image: cimg/base:2022.01
@@ -41,7 +41,7 @@ jobs:
             gcloud --quiet config set compute/zone $GOOGLE_COMPUTE_ZONE
             gcloud container clusters get-credentials $PROD_CLUSTER_NAME --zone $GOOGLE_COMPUTE_ZONE --project $GCP_PROJECT_ID1
             cd ~/project/scripts
-            sh K8s-generator.sh prod $DOCKER_IMAGE
+            sh K8s-generator.sh prod $DOCKER_IMAGE $GCP_PROJECT_ID1
             cat Deployment.yaml
             kubectl apply -f Deployment.yaml
             
