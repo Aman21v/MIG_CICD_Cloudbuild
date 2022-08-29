@@ -17,9 +17,7 @@ jobs:
       - run:
           name: building image
           command: |
-             docker build -t asia-south1-docker.pkg.dev/bce-poc/aman1-test/test2:latest .
-             
-             gcloud auth configure-docker asia-south1-docker.pkg.dev -y
+             gcloud auth configure-docker asia-south1-docker.pkg.dev -Y
              
            
       - gcloud/install
