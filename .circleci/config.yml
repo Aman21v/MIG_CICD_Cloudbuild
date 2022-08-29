@@ -24,7 +24,7 @@ jobs:
       - run:
           name: pushing image
           command: |
-            gcloud auth configure-docker asia-south1-docker.pkg.dev
+            gcloud auth configure-docker asia-south1-docker.pkg.dev -y
             echo $GCP_PROJECT_KEY | docker login -u _json_key --password-stdin \ https://asia-south1-docker.pkg.dev
         
     
