@@ -24,7 +24,7 @@ jobs:
          
   deploy_to_prod:
     environment:
-      DOCKER_IMAGE: asia-south1-docker.pkg.dev/$GCP_PROJECT_ID1/aman1-test/w:<<pipeline.number>>
+      DOCKER_IMAGE: asia-south1-docker.pkg.dev/searce-playground-v1/aman1-test/w:<<pipeline.number>>
 
     docker:
       - image: cimg/base:2022.01
