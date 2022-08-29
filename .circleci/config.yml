@@ -17,7 +17,7 @@ jobs:
       - run:
           name: building image
           command: |
-             docker build -t asia-south1-docker.pkg.dev/${GOOGLE_PROJECT_ID}/aman1-test/test1:latest .
+             docker build -t asia-south1-docker.pkg.dev/$GOOGLE_PROJECT_ID/aman1-test/test1:latest .
            
       - gcloud/install
       
