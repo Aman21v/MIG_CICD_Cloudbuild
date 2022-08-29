@@ -12,28 +12,21 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-         version: 19.03.13         
-      - gcp-gcr/build-image:
-          docker-context: .
-          dockerfile: Dockerfile
-          google-project-id: GOOGLE_PROJECT_ID
-          image: aman1-test/test
-          registry-url: "asia-south1-docker.pkg.dev"
-          path: . 
-          tag: latest
-          
-         
+         version: 19.03.13
+      - gcloud/install       
+      - run:
+          name: building image
+          command: docker build -t asia-south1-docker.pkg.dev/$GOOGLE_PROJECT_ID/aman1-test/test1:latest .
+
       - gcloud/install
       
       - run:
           name: AR authorization
           command: gcloud auth configure-docker\asia-south1-docker.pkg.dev
-          
-      - gcp-gcr/push-image:
-          registry-url: "asia-south1-docker.pkg.dev"
-          image: aman1-test/test
-          google-project-id: GOOGLE_PROJECT_ID
-          tag: latest     
+      - run:
+          name: pushing the image
+          command: docker push asia-south1-docker.pkg.dev/$GOOGLE_PROJECT_ID/aman1-test/test1:latest         
+   
     
 workflows:  
   workflow-build-push-image-aman:    
